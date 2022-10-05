@@ -1,0 +1,8 @@
+Flask~=2.2.2
+asn1crypto==1.3.0
+snowflake-connector-python==2.7.9
+flask-sqlalchemy==3.0.0
+snowflake-sqlalchemy==1.4.2
+Flask-Login==0.6.2
+
+Werkzeug==2.2.2

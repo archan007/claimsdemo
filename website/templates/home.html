@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <title>{% block title %}Claim submission{% endblock %}</title>
+  </head>
+
+  <body>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+    <div class="container">
+        <nav class="navbar navbar-light navbar-expand-md" style="background: var(--bs-gray-900);color: var(--bs-white);padding: 0px 0px;">
+            <div class="container-fluid"><a class="navbar-brand" href="#" style="color: var(--bs-gray-200);"><img src="/static/claimsdemo.jpg" alt=""
+   width="250" height="50"></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="#" style="color: var(--bs-gray-200);">Add Claims</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-gray-200);">View Claims</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#" style="color: var(--bs-gray-200);">Reporting</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <section>
+        <div class="container">
+            <div class="row" style="color: var(--bs-gray-200);background: var(--bs-gray-200);">
+                <div class="col-xl-8 offset-2 offset-xl-2" style="background: var(--bs-white);">
+                    <div class="card border-white border rounded-0 shadow">
+                        <div class="card-body"><label class="form-label" style="color: var(--bs-gray-900);font-size: 25px;">Claims submit and upload supporting document</label>
+                            <form method="post" enctype="multipart/form-data">
+                                <div><label class="form-label text-secondary">Policy</label><input class="form-control" type="text" id="policynum" name="policynum"></div>
+                                <div><label class="form-label text-secondary">Product</label><input class="form-control" type="text" id="product" name="product"></div>
+                                <div><label class="form-label text-secondary">Policy end date</label><input class="form-control" id="polenddate" type="date" name="polenddate"></div>
+                                <div><label class="form-label text-secondary">Claim raised by</label><input class="form-control" type="text" id="clientname" name="clientname"></div>
+                                <div><label class="form-label text-secondary">Loss date</label><input class="form-control" id="lossdate" name="lossdate" type="date"></div>
+                                <div><label class="form-label text-secondary">Loss amount</label><input class="form-control" type="number" id="lossamount" name="lossamount"></div>
+                                <div><label class="form-label text-secondary">Cause and description of damage</label><textarea class="form-control" id="notes" name="notes"></textarea></div>
+                                <!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-md-4 control-label">Is the damage potentially covered by another party?</label>
+  <div class="col-md-4">
+  <div class="radio">
+    <label for="multiparty-0">
+      <input type="radio" name="multiparty" id="multiparty-0" value="Yes" checked="checked">
+      Yes
+    </label>
+	</div>
+  <div class="radio">
+    <label for="multiparty-1">
+      <input type="radio" name="multiparty" id="multiparty-1" value="No">
+      No
+    </label>
+	</div>
+  </div>
+</div>
+                                <div><label class="form-label text-secondary">Upload supporting documents / receipt</label><input class="form-control" type="file" id="imgupload" name="imgupload"></div>
+                                <!-- Button (Double) -->
+<div class="form-group">
+  <div class="col-md-8">
+    <button id="save" name="save" class="btn btn-primary">Submit</button>
+    <button id="cancel" name="cancel" class="btn btn-warning">Cancel</button>
+  </div>
+</div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -15,6 +15,10 @@
       crossorigin="anonymous"
     />
     <title>{% block title %}Claim submission{% endblock %}</title>
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
   </head>
 
   <body>
@@ -56,31 +60,55 @@
                     <div class="card border-white border rounded-0 shadow">
                         <div class="card-body"><label class="form-label" style="color: var(--bs-gray-900);font-size: 25px;">Claims submit and upload supporting document</label>
                             <form method="post" enctype="multipart/form-data">
-                                <div><label class="form-label text-secondary">Policy</label><input class="form-control" type="text" id="policynum" name="policynum"></div>
-                                <div><label class="form-label text-secondary">Product</label><input class="form-control" type="text" id="product" name="product"></div>
-                                <div><label class="form-label text-secondary">Policy end date</label><input class="form-control" id="polenddate" type="date" name="polenddate"></div>
+                                <div>
+                                    <label class="form-label text-secondary">Policy</label>
+                                     <select name="policynum" id="policynum" class="form-control" data-live-search="true">
+                                        <option value=0>--Select policy--</option>';
+                                         {% for row in policylist %}
+                                            <option value="{{row.Policy_ID}}">{{row.Policy_desc}}</option>';
+                                        {% endfor %}
+                                     </select>
+                                </div>
+
+                                <div>
+                                    <label class="form-label text-secondary">Product</label>
+                                    <input class="form-control" type="text" id="product" name="product" readonly required>
+                                </div>
+                                <div>
+                                    <label class="form-label text-secondary">Policy end date</label>
+                                    <input class="form-control" id="polenddate" type="text" name="polenddate" readonly required>
+                                </div>
                                 <div><label class="form-label text-secondary">Claim raised by</label><input class="form-control" type="text" id="clientname" name="clientname"></div>
-                                <div><label class="form-label text-secondary">Loss date</label><input class="form-control" id="lossdate" name="lossdate" type="date"></div>
-                                <div><label class="form-label text-secondary">Loss amount</label><input class="form-control" type="number" id="lossamount" name="lossamount"></div>
+                                <div><label class="form-label text-secondary">Claim Date</label><input class="form-control" id="lossdate" name="lossdate" type="date"></div>
+
+                                <div>
+                                    <label class="form-label text-secondary">Amount</label>
+                                    <div class="input-group mb-3">
+                                        <span class="border rounded-0 input-group-text">£</span>
+                                        <input class="border rounded-0 form-control" type="number" id="lossamount" name="lossamount" step="0.01">
+                                        <span class="border rounded-0 input-group-text">0.00</span>
+                                    </div>
+                                </div>
+
                                 <div><label class="form-label text-secondary">Cause and description of damage</label><textarea class="form-control" id="notes" name="notes"></textarea></div>
                                 <!-- Multiple Radios -->
-<div class="form-group">
-  <label class="col-md-4 control-label">Is the damage potentially covered by another party?</label>
-  <div class="col-md-4">
-  <div class="radio">
-    <label for="multiparty-0">
-      <input type="radio" name="multiparty" id="multiparty-0" value="Yes" checked="checked">
-      Yes
-    </label>
-	</div>
-  <div class="radio">
-    <label for="multiparty-1">
-      <input type="radio" name="multiparty" id="multiparty-1" value="No">
-      No
-    </label>
-	</div>
-  </div>
-</div>
+                                    <div class="form-group">
+                                      <label class="col-md-4 control-label">Is the damage potentially covered by another party?</label>
+                                      <div class="col-md-4">
+                                      <div class="radio">
+                                        <label for="multiparty-0">
+                                          <input type="radio" name="multiparty" id="multiparty-0" value="Yes" checked="checked">
+                                          Yes
+                                        </label>
+                                        </div>
+                                      <div class="radio">
+                                        <label for="multiparty-1">
+                                          <input type="radio" name="multiparty" id="multiparty-1" value="No">
+                                          No
+                                        </label>
+                                        </div>
+                                      </div>
+                                    </div>
                                 <div><label class="form-label text-secondary">Upload supporting documents / receipt</label><input class="form-control" type="file" id="imgupload" name="imgupload"></div>
                                 <!-- Button (Double) -->
 <div class="form-group">
@@ -96,7 +124,26 @@
             </div>
         </div>
     </section>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+            policy_select = document.getElementById('policynum');
+            product_select = document.getElementById('product');
+            enddate_select = document.getElementById('polenddate');
+
+            policy_select.onchange = function(){
+             policy = policy_select.value;
+             <!-- alert(policy); -->
+             fetch('getPolicy/' + policy).then(function(response){
+              response.json().then(function(data) {
+               optionHTML = '';
+               for (policy of data.policyDetails) {
+                product_select.value = policy.product_name ;
+                enddate_select.value = policy.pol_end_date ;
+               }
+
+              });
+             });
+            }
+      </script>
 </body>
 
 </html>

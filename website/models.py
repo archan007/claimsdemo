@@ -6,7 +6,7 @@ class Claims(db.Model):
     claimid = db.Column(db.Integer, primary_key=True)
     policynumber = db.Column(db.String(50))
     product = db.Column(db.String(50))
-    policyenddate = db.Column(db.DateTime)
+    policyenddate = db.Column(db.String(20))
     customer_name = db.Column(db.String(100))
     loss_date = db.Column(db.DateTime)
     loss_amount = db.Column(db.String(20))

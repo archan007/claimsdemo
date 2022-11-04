@@ -1,0 +1,78 @@
+html {
+    box-sizing: border-box;
+      font-family: 'PT Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  }
+  *, 
+  *:before, 
+  *:after {
+    box-sizing: inherit;
+  }
+
+  body{
+      background-color: #f3f3f3;
+  }
+  form{
+      width: 100%;
+      max-width: 300px;
+      margin: 60px auto;
+  }
+  form input {
+      font-size: 30px;
+      padding: 0;
+      border: 2px solid #ccc;
+      border-left: 0;
+      width: 100%;
+      color: #999;
+      border-radius: 0 7px 7px 0;
+      font-family: 'Pt Sans' , sans-serif;
+
+
+  }
+
+  form input:focus{
+      outline: 0;
+  }
+
+  label{
+      color: #999;
+      display: block;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+  }
+  .flex {
+      display: flex;
+      justify-content: flex-start;
+  }
+  .flex input {
+      max-width: 300px;
+      flex: 1 1 300px;
+  }
+  .flex .currency {
+      font-size: 30px;
+      padding: 0 10px 0 20px;
+      color: #999;
+      border: 2px solid #ccc;
+      border-right: 0;
+      line-height: 2.5;
+      border-radius: 7px 0 0 7px;
+      background: white;
+  }
+  .form-row input {
+    padding: 3px 1px;
+    width: 100%;
+    }
+    input.currency {
+        text-align: right;
+        padding-right: 15px;
+    }
+    .input-group .form-control {
+        float: none;
+    }
+    .input-group .input-buttons {
+        position: relative;
+        z-index: 3;
+    }
